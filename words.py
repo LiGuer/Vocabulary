@@ -37,6 +37,6 @@ def word_count(filename):
         return md_table
 
 if __name__ == '__main__':
-    md_table = word_count('Groundwater.md')
+    md_table = word_count('data/IELTS_Reading_2.txt')
     with open('out.md', 'w') as file:
         file.write(md_table)
