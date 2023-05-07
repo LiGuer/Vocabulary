@@ -17,11 +17,15 @@ def word_count(filename):
 
     with open(filename, 'r', encoding='utf-8') as file:
         text = file.read()
+
+        text = text.replace("’", "'")
         text = text.replace("n't", " ")
-        text = re.sub(r'[.,\'"!?:]', ' ', text)
+        text = re.sub(r'[.,\'"!?:\(\)\[\]\{\}\-]', ' ', text)
 
         words = re.findall(r'\b[a-zA-Z]+\b', text.lower())
-        words = [word for word in words if len(word) >= 5 and word not in words_set]
+
+        words = [word for word in words if len(word) >= 4 and word not in words_set]
+
         freq = {}
         for word in words:
             freq[word] = freq.get(word, 0) + 1
@@ -40,6 +44,6 @@ def word_count(filename):
         return md_table
 
 if __name__ == '__main__':
-    md_table = word_count('data/The_Little_Prince.txt')
+    md_table = word_count("data/IELTS_Reading.txt")
     with open('out.md', 'w') as file:
         file.write(md_table)
